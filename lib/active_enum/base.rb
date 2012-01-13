@@ -48,8 +48,11 @@ module ActiveEnum
       end
 
       # Return enum values in an array suitable to pass to a Rails form select helper.
-      def to_select
-				store.values.map {|v| [v[1], v[0]] }
+			#
+			# alphabetize - Alphabetizes the select menu if True.
+      def to_select(alphabetize=false)
+				enum_values = alphabetize ? store.values.sort_by {|v| v[1]} : store.values
+				enum_values.map {|v| [v[1], v[0]] }
       end
 
       # Access id or name value. Pass an id number to retrieve the name or
